@@ -1,5 +1,6 @@
 $numbertotal = 10000
 
+# Measure
 Measure-Command -Expression {
     for($i=0; ($i -le $numbertotal );$i++){
         if($i % 2 -eq 0)
