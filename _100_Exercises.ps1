@@ -21,11 +21,28 @@ New-Item -ItemType 'Directory' -Name 'DataProcessing'
 
 # 4. Display all PowerShell environment variables and filter only those containing the word "PATH".
 
+Get-ChildItem "Env:" | Where-Object {$PSItem.Name -Contains "PATH"}
+
+
 # 5. Create a simple PowerShell script that accepts a name parameter and outputs "Hello, [name]!".
+
+Get-Command -Name *host*
+Get-Help Get-Host -Online
+Get-Help Read-Host -Online
+$Name = Read-Host "Insert your name"
+Write-Host "Hello $Name"
 
 # 6. Create a script that counts the number of files in a directory and outputs the result.
 
+Get-Help Measure-Object -Online
+Get-ChildItem | Measure-Object
+
 # 7. Use Get-Process to list all running processes, then filter to show only those using more than 100MB of memory.
+
+Get-Process | GM
+Get-Process | Where-Object {$PSItem.VM -gt 100MB} # For virtual Memory
+Get-Process | Where-Object {$_.WorkingSet -gt 100MB} # For RAM
+
 
 # 8. Create a PowerShell script that accepts multiple parameters (name, age, role) with appropriate data types.
 
