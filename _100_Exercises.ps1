@@ -43,20 +43,61 @@ Get-Process | GM
 Get-Process | Where-Object {$PSItem.VM -gt 100MB} # For virtual Memory
 Get-Process | Where-Object {$_.WorkingSet -gt 100MB} # For RAM
 
-
 # 8. Create a PowerShell script that accepts multiple parameters (name, age, role) with appropriate data types.
+
+[string]$Name = Read-Host "What's your name"
+[int]$Age = Read-Host "What's your age"
+[string]$Role = Read-Host "What's your role"
+
+Write-Host "My name is $Name, I'm $Age years old and my role is"
 
 # 9. List all PowerShell modules installed on your system and their versions.
 
+Get-Module -All | Select-Object -Property ModuleType, Version
+
 # 10. Create a basic PowerShell function that converts a temperature from Celsius to Fahrenheit.
+
+function Get-FahrenheitFromCelcius {
+    [int]$celcius = Read-Host -Prompt 'Please enter a Celsius Temperature'
+
+    [int]$fahrenheit = ($celcius * 9/5) + 32 
+
+    Write-Host "The converted temperature in fahrenheit is $fahrenheit"
+
+}
+
+Get-FahrenheitFromCelcius 
 
 # ## Intermediate Level
 
 # 11. Read a CSV file named "employees.csv" and display only the rows where the "Department" column equals "Data".
 
+Get-Command *path*
+Set-Location -Path 'C:\Users\karim.niang\Downloads'
+New-Item -ItemType 'File' -Name 'emplyees.csv'
+
+$employeeContent  = @(
+    'name, surname, Department'
+    'Lucas,Pasta,Mode'
+    'Alessio,Maccheroni,Marketing'
+    'Franco,Numeri,Data'
+    'Giorgio,Molto,Data'
+)
+Add-Content -Path 'emplyees.csv' -Value $employeeContent
+
+Get-Help Import-Csv -Online 
+Import-Csv -Path 'emplyees.csv' -Delimiter ',' | Where-Object {$PSItem.Department -eq 'Data'} | Write-Host
+
+
 # 12. Create a script that finds all files larger than 100MB in a specified directory and its subdirectories.
 
+Get-ChildItem . | Where-Object {$PSItem.length -gt 100MB} |Write-Host # Nothing
+
+Get-ChildItem . | Where-Object {$PSItem.length -gt 10MB} # Nothing
+
 # 13. Write a script that retrieves system information (OS version, CPU, RAM) and exports it to a JSON file.
+
+Get-ComputerInfo 
 
 # 14. Use PowerShell to parse a log file and count occurrences of ERROR, WARNING, and INFO messages.
 
